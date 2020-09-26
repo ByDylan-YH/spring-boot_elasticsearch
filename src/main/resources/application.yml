@@ -1,0 +1,7 @@
+logging:
+  pattern:
+    console: "%d{yyyy-MM-dd HH:mm:ss} [%highlight(%level)] [%40.40F:%L]] - %black(%msg%n)"
+
+elasticsearch:
+  host: "192.168.1.203"
+  port: 9200
