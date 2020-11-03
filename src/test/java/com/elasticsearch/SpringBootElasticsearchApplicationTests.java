@@ -15,6 +15,7 @@ import org.elasticsearch.action.index.IndexRequest;
 import org.elasticsearch.action.index.IndexResponse;
 import org.elasticsearch.action.search.SearchRequest;
 import org.elasticsearch.action.search.SearchResponse;
+import org.elasticsearch.action.support.WriteRequest;
 import org.elasticsearch.action.support.master.AcknowledgedResponse;
 import org.elasticsearch.action.update.UpdateRequest;
 import org.elasticsearch.action.update.UpdateResponse;
@@ -88,8 +89,8 @@ class SpringBootElasticsearchApplicationTests {
     void testAddDocument() {
         User user = new User("BY", 25);
         // 创建请求
-        IndexRequest request = new IndexRequest("bydylan");
 //        规则 put /bydylan/_doc/1
+        IndexRequest request = new IndexRequest("bydylan");
         request.id("1");
         request.timeout(TimeValue.timeValueSeconds(1));
 //        或者
@@ -139,6 +140,8 @@ class SpringBootElasticsearchApplicationTests {
     @Test
     void testUpdateRequest() {
         UpdateRequest updateRequest = new UpdateRequest("bydylan", "1");
+//        立即生效
+        updateRequest.setRefreshPolicy(WriteRequest.RefreshPolicy.IMMEDIATE);
         updateRequest.timeout("1s");
         User user = new User("BY", 18);
         UpdateResponse updateResponse = null;
